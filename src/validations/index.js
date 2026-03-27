@@ -1,8 +1,8 @@
 module.exports = {
-  ...require('./authValidation.js'),
-  ...require('./userValidation.js'),
-  ...require('./tripValidation.js'),
-  ...require('./connectionValidation.js'),
-  ...require('./messageValidation.js'),
-  ...require('./memoryValidation.js')
+  ...require('./auth.validation.js'),
+  ...require('./user.validation.js'),
+  ...require('./trip.validation.js'),
+  ...require('./connection.validation.js'),
+  ...require('./message.validation.js'),
+  ...require('./memory.validation.js')
 };

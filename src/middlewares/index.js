@@ -1,4 +1,4 @@
 module.exports = {
-  ...require('./authMiddleware.js'),
-  ...require('./errorMiddleware.js')
+  ...require('./auth.middleware.js'),
+  ...require('./error.middleware.js')
 };

@@ -1,9 +1,9 @@
-const User = require('./User.js');
-const Trip = require('./Trip.js');
-const Connection = require('./Connection.js');
-const Message = require('./Message.js');
-const Notification = require('./Notification.js');
-const Memory = require('./Memory.js');
+const User = require('./user.model.js');
+const Trip = require('./trip.model.js');
+const Connection = require('./connection.model.js');
+const Message = require('./message.model.js');
+const Notification = require('./notification.model.js');
+const Memory = require('./memory.model.js');
 
 module.exports = {
   User,
