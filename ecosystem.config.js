@@ -2,7 +2,7 @@ module.exports = {
   apps: [
     {
       name: 'travelbuddy-backend',
-      script: 'src/server.js',
+      script: 'server.js',
       instances: 'max', // Use all available CPUs
       exec_mode: 'cluster',
       env: {
