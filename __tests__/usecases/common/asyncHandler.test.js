@@ -56,9 +56,7 @@ describe('asyncHandler Utility', () => {
   it('should handle synchronous errors as promises', () => {
     // asyncHandler wraps handler in Promise.resolve which catches sync errors
     const testError = new Error('Sync error');
-    let thrownError = null;
-    
-    const mockHandler = jest.fn((req, res, next) => {
+    const mockHandler = jest.fn((_req, _res, _next) => {
       return Promise.resolve().then(() => {
         throw testError; // Throw inside promise chain
       });
@@ -79,7 +77,7 @@ describe('asyncHandler Utility', () => {
   });
 
   it('should work with async/await functions', () => {
-    const asyncFn = async (req, res, next) => {
+    const asyncFn = async (_req, res, _next) => {
       await new Promise(resolve => setTimeout(resolve, 5));
       res.status = 200;
     };

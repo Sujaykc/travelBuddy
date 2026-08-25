@@ -5,9 +5,14 @@ const logger = require('../helpers/logger');
 
 const buildUnauthorizedError = (message) => new AppError(message, 401, 'UNAUTHORIZED');
 
+const rejectUnauthorized = (res, next, message) => {
+  res.status(401);
+  return next(buildUnauthorizedError(message));
+};
+
 const protect = async (req, res, next) => {
   if (!req.headers.authorization || !req.headers.authorization.startsWith('Bearer ')) {
-    return next(buildUnauthorizedError('Not authorized, no token'));
+    return rejectUnauthorized(res, next, 'Not authorized, no token');
   }
 
   const token = req.headers.authorization.split(' ')[1];
@@ -17,7 +22,7 @@ const protect = async (req, res, next) => {
     const user = await User.findById(decoded.id).select('-password');
 
     if (!user) {
-      return next(buildUnauthorizedError('Not authorized, user not found'));
+      return rejectUnauthorized(res, next, 'Not authorized, user not found');
     }
 
     req.user = user;
@@ -29,7 +34,7 @@ const protect = async (req, res, next) => {
         name: error.name
       });
     }
-    return next(buildUnauthorizedError('Not authorized, token failed'));
+    return rejectUnauthorized(res, next, 'Not authorized, token failed');
   }
 };
 

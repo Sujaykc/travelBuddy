@@ -165,10 +165,7 @@ const sendEmail = async ({ to, subject, text, html, context }) => {
     };
   } catch (error) {
     logger.error('Email send failed for %s to %s: %s', context, redactEmail(to), error.message);
-    return {
-      success: false,
-      error: error.message
-    };
+    throw createError(error.message, error.status || 503);
   }
 };
 

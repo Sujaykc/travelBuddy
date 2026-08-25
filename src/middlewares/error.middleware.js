@@ -4,7 +4,7 @@ const notFound = (req, res, next) => {
   next(error);
 };
 
-const errorHandler = (err, req, res, next) => {
+const errorHandler = (err, req, res, _next) => {
   const fallbackStatus = res.statusCode === 200 ? 500 : res.statusCode;
   const statusCode = err.statusCode || err.status || fallbackStatus;
   res.status(statusCode);
@@ -14,7 +14,8 @@ const errorHandler = (err, req, res, next) => {
   const message = hideDetails ? 'Internal server error' : err.message || 'Internal server error';
 
   const response = {
-    message
+    message,
+    stack: isProduction ? null : err.stack || null
   };
 
   if (!hideDetails && err.code) {
@@ -23,10 +24,6 @@ const errorHandler = (err, req, res, next) => {
 
   if (!hideDetails && err.details) {
     response.details = err.details;
-  }
-
-  if (!isProduction && err.stack) {
-    response.stack = err.stack;
   }
 
   res.json(response);

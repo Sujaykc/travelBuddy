@@ -1,4 +1,5 @@
 const express = require('express');
+const chalk = require('chalk');
 const dotenv = require('dotenv');
 const cors = require('cors');
 const morgan = require('morgan');
@@ -15,7 +16,7 @@ const logger = require('./src/helpers/logger.js');
 
 // 1. Catch synchronous exceptions
 process.on('uncaughtException', (err) => {
-  console.error('UNCAUGHT EXCEPTION! Shutting down...');
+  logger.error(chalk.red('UNCAUGHT EXCEPTION! Shutting down...'));
   if (logger) logger.error('Uncaught Exception:', err);
   process.exit(1);
 });

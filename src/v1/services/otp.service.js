@@ -1,6 +1,6 @@
 const crypto = require('crypto');
 
-const createOtpService = ({ otpLength, otpTtlMs, cryptoService }) => {
+const createOtpService = ({ otpLength, otpTtlMs, cryptoService: _cryptoService }) => {
   const generateOtp = () => {
     let otp = '';
 

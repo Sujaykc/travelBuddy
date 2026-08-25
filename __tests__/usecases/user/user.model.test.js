@@ -1,4 +1,3 @@
-const mongoose = require('mongoose');
 const bcrypt = require('bcryptjs');
 
 describe('User Model', () => {
@@ -67,8 +66,6 @@ describe('User Model', () => {
 
     it('should have pre-save hook for password hashing', async () => {
       // Verify hook exists via schema hooks
-      const hooks = User.schema.hooks;
-      const preSaveHooks = hooks && hooks.get && hooks.get('pre');
       // In Mongoose, hooks are stored differently - just verify schema has the middleware
       expect(User.schema.methods.matchPassword).toBeDefined();
     });
@@ -77,7 +74,7 @@ describe('User Model', () => {
   describe('Password Hashing', () => {
     it('should hash password before saving', async () => {
       // Create a user instance
-      const user = new User({
+      new User({
         firstName: 'John',
         lastName: 'Doe',
         email: 'john@example.com',

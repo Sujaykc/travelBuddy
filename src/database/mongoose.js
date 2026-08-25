@@ -1,4 +1,6 @@
 const mongoose = require('mongoose');
+const chalk = require('chalk');
+const logger = require('../helpers/logger.js');
 
 const connectDB = async () => {
   const uri = process.env.MONGO_URI;
@@ -9,7 +11,7 @@ const connectDB = async () => {
 
   mongoose.set('strictQuery', true);
   await mongoose.connect(uri);
-  console.log('MongoDB connected successfully');
+  logger.info(chalk.green('MongoDB connected successfully'));
 };
 
 module.exports = connectDB;
